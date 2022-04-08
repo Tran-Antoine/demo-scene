@@ -1,6 +1,5 @@
 package ch.epfl.atran.render;
 
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import java.io.BufferedReader;

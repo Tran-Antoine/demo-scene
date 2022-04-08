@@ -2,10 +2,7 @@ package ch.epfl.atran.ecs;
 
 import ch.epfl.atran.event.EntityObserver;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DefaultEntity implements Entity {
 
@@ -73,5 +70,18 @@ public class DefaultEntity implements Entity {
     @Override
     public String toString() {
         return "DefaultEntity{%s}".formatted(components);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DefaultEntity that = (DefaultEntity) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
