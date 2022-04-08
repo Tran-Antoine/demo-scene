@@ -1,21 +1,22 @@
-package ch.epfl.atran.ecs;
+package ch.epfl.atran.data;
 
+import ch.epfl.atran.ecs.EntityComponent;
 import ch.epfl.atran.math.Vector3f;
 
-public class TransformComponent implements Component {
+public class TransformComponent implements EntityComponent {
 
     private Vector3f position;
     private Vector3f rotation;
     private Vector3f scale;
 
-    public TransformComponent() {
-        this(Vector3f.ZERO, Vector3f.ZERO, Vector3f.ONE);
-    }
-
     public TransformComponent(Vector3f position, Vector3f rotation, Vector3f scale) {
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
+    }
+
+    public static TransformComponent noTransform() {
+        return new TransformComponent(Vector3f.ZERO, Vector3f.ZERO, Vector3f.ONE);
     }
 
     public Vector3f position() {

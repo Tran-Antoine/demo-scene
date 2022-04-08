@@ -17,7 +17,7 @@ public class SampleModels {
 
     public static RawModel sampleGasket() {
         return SierpinskyGasketFactory.generate(
-                100000,
+                50_000,
                 789785678456L,
                 new Vector3f(-0.4f, 0.3f, 0));
     }

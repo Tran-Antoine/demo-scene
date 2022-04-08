@@ -13,7 +13,7 @@ public interface EntitySystem {
         return true;
     }
 
-    static EntitySystem fromRequiredComponents(EntitySystem source, List<? extends Class<? extends Component>> types) {
+    static EntitySystem fromRequiredComponents(EntitySystem source, List<? extends Class<? extends EntityComponent>> types) {
         return new EntitySystem() {
             @Override
             public void onEntityAdded(Entity entity, float tpf) {

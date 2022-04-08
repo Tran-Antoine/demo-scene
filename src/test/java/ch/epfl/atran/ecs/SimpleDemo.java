@@ -45,7 +45,7 @@ public class SimpleDemo {
         }
     }
 
-    private static class MockComponent implements Component {
+    private static class MockComponent implements EntityComponent {
 
         @Override
         public String toString() {

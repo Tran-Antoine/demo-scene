@@ -1,10 +1,10 @@
 package ch.epfl.atran;
 
 import ch.epfl.atran.data.RawModel;
+import ch.epfl.atran.data.ShapeComponent;
 import ch.epfl.atran.ecs.Entity;
-import ch.epfl.atran.ecs.ShapeComponent;
 import ch.epfl.atran.ecs.SystemManager;
-import ch.epfl.atran.ecs.TransformComponent;
+import ch.epfl.atran.data.TransformComponent;
 import ch.epfl.atran.models.SampleModels;
 import ch.epfl.atran.render.*;
 import org.lwjgl.glfw.Callbacks;
@@ -17,6 +17,7 @@ import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.IntBuffer;
+import java.util.List;
 
 public class MainWindow {
 
@@ -90,11 +91,12 @@ public class MainWindow {
     private void loop() {
 
         SystemManager manager = new SystemManager();
-        ShaderProgram shaderProgram = initShader();
 
-        RawModel model = SampleModels.sampleGasket();
-        manager.createEntity(new ShapeComponent(model), new TransformComponent());
-        manager.addSystem(RendererManager.newRenderer(new WorldObjectRenderer(), shaderProgram));
+        manager.createEntity(new ShapeComponent(SampleModels.sampleGasket()), TransformComponent.noTransform());
+        manager.addSystem(RendererManager.newRenderer(
+                new WorldObjectRenderer(),
+                initShader(),
+                List.of(ShapeComponent.class, TransformComponent.class)));
 
         long previousTime = System.currentTimeMillis();
 
@@ -105,6 +107,7 @@ public class MainWindow {
             previousTime = currentTime;
 
             manager.update(tpf / 1000f);
+
             GLFW.glfwSwapBuffers(window); // swap the color buffers
             GLFW.glfwPollEvents(); // Poll for window events
         }

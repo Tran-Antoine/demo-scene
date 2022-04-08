@@ -8,7 +8,7 @@ public class DefaultEntity implements Entity {
 
     private static long count = 0;
 
-    private final Set<Component> components;
+    private final Set<EntityComponent> components;
     private final Set<EntityObserver> observers;
     private final long id;
 
@@ -24,25 +24,25 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
-    public void addComponent(Component component) {
+    public void addComponent(EntityComponent component) {
         components.add(component);
         notifyObservers();
     }
 
     @Override
-    public void addComponents(Component... components) {
+    public void addComponents(EntityComponent... components) {
         this.components.addAll(Arrays.asList(components));
         notifyObservers();
     }
 
     @Override
-    public void removeComponent(Component component) {
+    public void removeComponent(EntityComponent component) {
         components.remove(component);
         notifyObservers();
     }
 
     @Override
-    public Set<? extends Component> components() {
+    public Set<? extends EntityComponent> components() {
         return Collections.unmodifiableSet(components);
     }
 

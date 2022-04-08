@@ -45,7 +45,7 @@ public class SystemManager implements FrameUpdatable, EntityObserver {
         return entity;
     }
 
-    public Entity createEntity(Component... components) {
+    public Entity createEntity(EntityComponent... components) {
         Entity entity = new DefaultEntity();
         entity.addComponents(components);
         addEntity(entity);

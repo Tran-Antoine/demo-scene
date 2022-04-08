@@ -2,8 +2,8 @@ package ch.epfl.atran.render;
 
 import ch.epfl.atran.data.RawModel;
 import ch.epfl.atran.ecs.Entity;
-import ch.epfl.atran.ecs.ShapeComponent;
-import ch.epfl.atran.ecs.TransformComponent;
+import ch.epfl.atran.data.ShapeComponent;
+import ch.epfl.atran.data.TransformComponent;
 import ch.epfl.atran.math.Transforms;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
