@@ -1,6 +1,5 @@
 package ch.epfl.atran.math;
 
-import ch.epfl.atran.data.WorldObject;
 import ch.epfl.atran.ecs.TransformComponent;
 
 public class Transforms {
@@ -99,9 +98,4 @@ public class Transforms {
         return rotationXMatrix(rx).mul(rotationYMatrix(ry)).mul(rotationZMatrix(rz));
     }
 
-    public static Matrix4f fromObject(WorldObject obj) {
-        return rotationMatrix(obj.getRotation())
-                .mul(scalingMatrix(obj.getScale()))
-                .mul(translationMatrix(obj.getPosition()));
-    }
 }

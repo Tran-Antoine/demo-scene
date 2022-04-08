@@ -1,13 +1,10 @@
 package ch.epfl.atran;
 
 import ch.epfl.atran.data.RawModel;
-import ch.epfl.atran.data.WorldObject;
 import ch.epfl.atran.ecs.Entity;
 import ch.epfl.atran.ecs.ShapeComponent;
 import ch.epfl.atran.ecs.SystemManager;
 import ch.epfl.atran.ecs.TransformComponent;
-import ch.epfl.atran.math.Transforms;
-import ch.epfl.atran.math.Vector3f;
 import ch.epfl.atran.models.SampleModels;
 import ch.epfl.atran.render.*;
 import org.lwjgl.glfw.Callbacks;
@@ -96,8 +93,8 @@ public class MainWindow {
         ShaderProgram shaderProgram = initShader();
 
         RawModel model = SampleModels.sampleGasket();
-        Entity obj = manager.createEntity(new ShapeComponent(model), new TransformComponent());
-        manager.addSystem(WorldObjectRenderer.newRenderer(shaderProgram));
+        manager.createEntity(new ShapeComponent(model), new TransformComponent());
+        manager.addSystem(RendererManager.newRenderer(new WorldObjectRenderer(), shaderProgram));
 
         long previousTime = System.currentTimeMillis();
 

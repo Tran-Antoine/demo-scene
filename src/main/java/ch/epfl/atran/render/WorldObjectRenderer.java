@@ -2,60 +2,27 @@ package ch.epfl.atran.render;
 
 import ch.epfl.atran.data.RawModel;
 import ch.epfl.atran.ecs.Entity;
-import ch.epfl.atran.ecs.EntitySystem;
 import ch.epfl.atran.ecs.ShapeComponent;
 import ch.epfl.atran.ecs.TransformComponent;
 import ch.epfl.atran.math.Transforms;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
-import java.util.List;
-
-public class WorldObjectRenderer implements Renderer<Entity>, EntitySystem {
-
-    private final ShaderProgram shader;
-
-    private WorldObjectRenderer(ShaderProgram shader) {
-        this.shader = shader;
-    }
-
-    public static EntitySystem newRenderer(ShaderProgram shader) {
-        return EntitySystem.fromRequiredComponents(
-                new WorldObjectRenderer(shader),
-                List.of(ShapeComponent.class,
-                        TransformComponent.class)
-        );
-    }
-
-    @Override
-    public void onEntityAdded(Entity entity, float tpf) { }
-
-    @Override
-    public void onEntityUpdated(Entity entity, float tpf) { }
-
-    @Override
-    public void onEntityRemoved(Entity entity, float tpf) { }
-
-    @Override
-    public void onUpdate(Entity entity, float tpf) {
-        prepare(entity);
-        render(entity);
-        cleanUp(entity);
-    }
+public class WorldObjectRenderer implements Renderer<Entity> {
 
     @Override
     public void prepare(Entity obj) {
-        RawModel model = obj.get(ShapeComponent.class).getModel();
-
-        GL30.glBindVertexArray(model.vaoId());
+        int vaoId = obj
+                .get(ShapeComponent.class)
+                .model()
+                .vaoId();
+        GL30.glBindVertexArray(vaoId);
         GL30.glEnableVertexAttribArray(0);
-
-        shader.start();
     }
 
     @Override
-    public void render(Entity obj) {
-        RawModel model = obj.get(ShapeComponent.class).getModel();
+    public void render(Entity obj, ShaderProgram shader) {
+
         TransformComponent transform = obj.get(TransformComponent.class);
 
         GL30.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT); // clear the framebuffer
@@ -66,6 +33,7 @@ public class WorldObjectRenderer implements Renderer<Entity>, EntitySystem {
         shader.setUniformMatrix4f("scale",       Transforms.scalingMatrix(transform));
         shader.setUniformMatrix4f("translation", Transforms.translationMatrix(transform));
 
+        RawModel model = obj.get(ShapeComponent.class).model();
         GL30.glDrawElements(model.drawType(), model.vertexCount(), GL11.GL_UNSIGNED_INT, 0);
         GL30.glFlush();
     }
@@ -74,6 +42,5 @@ public class WorldObjectRenderer implements Renderer<Entity>, EntitySystem {
     public void cleanUp(Entity obj) {
         GL30.glDisableVertexAttribArray(0);
         GL30.glBindVertexArray(0);
-        shader.stop();
     }
 }

@@ -1,5 +1,8 @@
 package ch.epfl.atran.data;
 
+/**
+ * Set of useful constants for raw model loading.
+ */
 public interface RawModels {
 
     int POSITION_INDEX = 0;
