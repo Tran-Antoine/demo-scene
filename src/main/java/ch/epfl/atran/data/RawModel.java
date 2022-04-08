@@ -20,7 +20,7 @@ public class RawModel {
     }
 
     public RawModel(float[] positions, int[] indices, int drawType) {
-        this.vaoId = createVAO(positions, indices);
+        this.vaoId = createVAO(positions.clone(), indices.clone());
         this.size = indices.length;
         this.drawType = drawType;
     }

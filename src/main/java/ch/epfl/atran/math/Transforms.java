@@ -1,6 +1,6 @@
 package ch.epfl.atran.math;
 
-import ch.epfl.atran.ecs.TransformComponent;
+import ch.epfl.atran.data.TransformComponent;
 
 public class Transforms {
 

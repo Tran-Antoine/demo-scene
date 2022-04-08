@@ -32,7 +32,7 @@ public class RendererManager implements EntitySystem {
      */
     public static EntitySystem newRenderer(
             Renderer<Entity> renderer, ShaderProgram shader,
-            List<? extends Class<? extends Component>> requiredComponents) {
+            List<? extends Class<? extends EntityComponent>> requiredComponents) {
         
         return EntitySystem.fromRequiredComponents(
                 new RendererManager(renderer, shader),
