@@ -3,6 +3,12 @@ package ch.epfl.atran.data;
 import ch.epfl.atran.ecs.EntityComponent;
 import ch.epfl.atran.math.Vector3f;
 
+/**
+ * World transformation described by position, rotation and scale.
+ *
+ * Allows raw models to be transposed to a 3D space with fixed referential, without having to transfer new redundant
+ * data to the GPU when scaling, rotating or moving the object.
+ */
 public class TransformComponent implements EntityComponent {
 
     private Vector3f position;

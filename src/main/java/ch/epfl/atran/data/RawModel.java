@@ -9,6 +9,13 @@ import java.nio.IntBuffer;
 
 import static ch.epfl.atran.data.RawModels.*;
 
+/**
+ * High-level abstraction over OpenGL primitive VAO / VBO types.
+ *
+ * Raw models are immutable pieces of data that are identified by a VAO. They are loaded from a float array
+ * indicating referential-free vertices and an index buffer to connect those vertices. An optional draw type can
+ * be specified to tell OpenGL how to draw the connections.
+ */
 public class RawModel {
 
     private final int vaoId;
