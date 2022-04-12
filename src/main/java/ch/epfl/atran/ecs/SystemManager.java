@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+/**
+ * Top of the hierarchy object that connects systems to entities.
+ */
 public class SystemManager implements FrameUpdatable, EntityObserver {
 
     private final Set<Entity> entities;
