@@ -90,6 +90,21 @@ public class Transforms {
         return new Matrix4f(elements);
     }
 
+    public static Matrix4f smallAnglesRotationMatrix(Vector3f rot) {
+
+        float psi = rot.x();
+        float phi = rot.y();
+        float the = rot.z();
+
+        float[][] elements = {
+                {1,    -psi, phi,   0},
+                {psi,  1,    -the,  0},
+                {-phi, the,  1,     0},
+                {0,    0,    0,     1}
+        };
+
+        return new Matrix4f(elements);
+    }
     public static Matrix4f rotationMatrix(Vector3f rot) {
         return rotationMatrix(rot.x(), rot.y(), rot.z());
     }
