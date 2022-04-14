@@ -41,15 +41,6 @@ public class RendererManager implements EntitySystem {
     }
 
     @Override
-    public void onEntityAdded(Entity entity, float tpf) { }
-
-    @Override
-    public void onEntityUpdated(Entity entity, float tpf) { }
-
-    @Override
-    public void onEntityRemoved(Entity entity, float tpf) { }
-
-    @Override
     public void onUpdate(Entity entity, float tpf) {
         renderer.prepare(entity);
         shader.start();
